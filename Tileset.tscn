@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://alive.png" type="Texture" id=1]
+[ext_resource path="res://dead.png" type="Texture" id=2]
+
+[node name="Tileset" type="Node2D"]
+
+position = Vector2( 5, 2.5 )
+scale = Vector2( 0.15625, 0.078125 )
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="alive" type="Sprite" parent="." index="0"]
+
+position = Vector2( 0, -32 )
+scale = Vector2( 6.4, 12.8 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="dead" type="Sprite" parent="." index="1"]
+
+position = Vector2( -32, -32 )
+scale = Vector2( 6.4, 12.8 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+
