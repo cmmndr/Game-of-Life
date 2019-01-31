@@ -13,11 +13,15 @@ func _ready():
 
 func _process(delta):
 	if Input.is_mouse_button_pressed(BUTTON_LEFT):
+		timer.set_paused(true)
 		var mousePos = get_viewport().get_mouse_position()
 		var location = tilemap.world_to_map(mousePos)
 		var cell = tilemap.get_cell(location.x, location.y)
 		if(cell != -1):
 			tilemap.set_cell(location.x, location.y, 0)
+	else:
+		if(timer.is_paused()):
+			timer.set_paused(false)
 
 
 func update():
@@ -25,12 +29,10 @@ func update():
 
 
 func checkGeneration():
-	var cells = tilemap.get_used_cells()
 	var alive_cells = tilemap.get_used_cells_by_id(0)
 	var dead_cells = tilemap.get_used_cells_by_id(1)
 	for cell in alive_cells:
 		var alive_neighbours = get_alive_neighbours(cell, alive_cells)
-		#print(alive_neighbours.size())
 		rule_alive(cell, alive_neighbours)
 
 	for cell in dead_cells:
@@ -39,7 +41,6 @@ func checkGeneration():
 
 func get_alive_neighbours(cell, alive_cells):
 	var neighbours = []
-	var current_cell = Vector2(cell.x, cell.y)
 	var uu = Vector2(cell.x,cell.y-1)
 	var ur = Vector2(cell.x+1,cell.y-1)
 	var mr = Vector2(cell.x+1,cell.y)
